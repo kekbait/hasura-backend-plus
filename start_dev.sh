@@ -7,6 +7,8 @@ export-dotenv .env.test HASURA_GRAPHQL_ADMIN_SECRET
 export-dotenv .env.development S3_BUCKET
 export-dotenv .env.development S3_ACCESS_KEY_ID
 export-dotenv .env.development S3_SECRET_ACCESS_KEY
+# Use another internal port (4000) to run the dev server so Puppeteer Jest can use the default port (3000) 
+export PORT=4000
 
 # Start docker services
 docker-compose -p hbp_dev -f docker-compose.yaml -f docker-compose.dev.yaml up -d $build
@@ -18,7 +20,7 @@ printf 'endpoint: http://localhost:8080\nHASURA_GRAPHQL_ADMIN_SECRET: %s\n' $HAS
 hasura console &
 console_pid=$!
 # Run Jest on watch mode
-docker exec -it hbp_dev_hasura-backend-plus_1 yarn test:watch
+docker exec -it -e PORT=3000 hbp_dev_hasura-backend-plus_1 yarn test:watch
 # Terminate the Hasura console
 kill -TERM $console_pid
 # Stop and remove all docker images, volumes and networks
