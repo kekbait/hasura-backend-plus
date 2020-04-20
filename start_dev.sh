@@ -1,13 +1,13 @@
 #!/bin/bash
 source bash-utils.sh
 script_args $@
-# Fetch the HASURA_GRAPHQL_ADMIN_SECRET from .env.test so it is used both in the docker-compose and in jest
+# Fetch variables from .env.test so it is used both in the docker-compose and in jest
 export-dotenv .env.test HASURA_GRAPHQL_ADMIN_SECRET
+export-dotenv .env.test JWT_KEY
 # Load the variables required for the Minio service
-export-dotenv .env.development S3_BUCKET
-export-dotenv .env.development S3_ACCESS_KEY_ID
-export-dotenv .env.development S3_SECRET_ACCESS_KEY
-# Use another internal port (4000) to run the dev server so Puppeteer Jest can use the default port (3000) 
+export-dotenv .env.test S3_SECRET_ACCESS_KEY
+
+# Use another internal port (4000) to run the dev server so Puppeteer Jest can use the default port (3000) in the local docker context
 export PORT=4000
 
 # Start docker services
