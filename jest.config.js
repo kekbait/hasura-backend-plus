@@ -1,13 +1,13 @@
 module.exports = {
-  // See: https://github.com/smooth-code/jest-puppeteer
-  preset: 'jest-puppeteer',
+  globalSetup: './jest/setup.js',
+  globalTeardown: './jest/teardown.js',
+  testEnvironment: './jest/puppeteer_environment.js',
   verbose: true,
   moduleNameMapper: {
     '^@shared/(.*)$': '<rootDir>/src/shared/$1'
   },
-  // testMatch: ['**/?(*.)+(spec|test).[t]s'],
   testPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/node_modules/'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js', 'jest-extended'],
+  setupFilesAfterEnv: ['expect-puppeteer', 'jest-extended'],
   transform: {
     '^.+\\.ts?$': 'ts-jest'
   }
