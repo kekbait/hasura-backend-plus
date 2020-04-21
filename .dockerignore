@@ -4,7 +4,6 @@
 coverage
 docs
 examples
-migrations
 mock-config
 node_modules
 *.sh
@@ -16,3 +15,4 @@ Dockerfile*
 jest*
 npm-debug.log
 yarn-error.log
+**/*.test.ts
