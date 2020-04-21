@@ -4,8 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    env_file: .env.development
+    env_file: .env.dockerdev
     environment:
+      NODE_ENV: test
       JWT_ALGORITHM: HS256
       JWT_KEY: '${JWT_KEY}'
       SMTP_HOST: mailhog
